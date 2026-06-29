@@ -24,7 +24,7 @@ DELIVERABLES
 CORE INFRASTRUCTURE
 ────────────────────────────────────────────────────────────────────────────
 ✅ 12 TypeScript Interfaces (src/types/index.ts)
-✅ Claude API Client Wrapper (src/utils/claude-client.ts)
+✅ LLM API Client Wrapper (src/utils/LLM-client.ts)
 ✅ Data Formatting Utilities (src/utils/data-formatter.ts)
 ✅ 8 System Prompts (src/prompts/index.ts)
 ✅ Tool Registry (src/tools/index.ts)
@@ -58,7 +58,7 @@ src/
 ├── prompts/              Isolated system prompts
 │   └── index.ts
 ├── utils/                Reusable utilities
-│   ├── claude-client.ts  API wrapper
+│   ├── LLM-client.ts  API wrapper
 │   └── data-formatter.ts Data transformations
 └── types/                TypeScript interfaces
     └── index.ts
@@ -76,7 +76,7 @@ DESIGN PRINCIPLES
 
 CONSISTENT TOOL PATTERN
 ────────────────────────────────────────────────────────────────────────────
-Input → Validate → Format → Call Claude → Parse → Return ToolResponse
+Input → Validate → Format → Call LLM → Parse → Return ToolResponse
 
 Each tool returns:
 {
@@ -140,7 +140,7 @@ CLAUDE INTEGRATION
 
 PERFORMANCE
 ────────────────────────────────────────────────────────────────────────────
-• No nested Claude calls
+• No nested LLM calls
 • No database dependencies
 • Parallel execution capable
 • Stateless (scales horizontally)
@@ -179,7 +179,7 @@ TECHNOLOGY STACK
 
 Runtime:        Node.js 20+
 Language:       TypeScript 5.3+
-API:            Anthropic Claude (Opus 4.6)
+API:            Anthropic LLM (Opus 4.6)
 Package Mgr:    npm
 Build Tool:     tsc (TypeScript compiler)
 Patterns:       Functional programming
@@ -270,12 +270,12 @@ MEDIUM TERM (1-2 Weeks)
   1. Add Redis caching layer
   2. Implement error recovery/retries
   3. Add metrics and observability
-  4. Optimize Claude prompts
+  4. Optimize LLM prompts
 
 LONG TERM (1-2 Months)
   1. Add batch operations
   2. Implement WebSocket updates
-  3. Multi-model support (Claude + GPT)
+  3. Multi-model support (LLM + GPT)
   4. Advanced analytics dashboard
 
 ================================================================================

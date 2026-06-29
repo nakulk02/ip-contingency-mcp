@@ -32,7 +32,7 @@ src/
 ├── prompts/                    # System prompts (isolated)
 │   └── index.ts               # 8 independent prompts
 ├── utils/                      # Reusable utilities
-│   ├── claude-client.ts       # API wrapper
+│   ├── LLM-client.ts       # API wrapper
 │   └── data-formatter.ts      # Data transformations
 └── types/                      # TypeScript interfaces
     └── index.ts               # 12 exported types
@@ -50,8 +50,8 @@ interface ToolInput { /* ... */ }
 export async function myTool(input: ToolInput): Promise<ToolResponse<OutputType>> {
   try {
     // 1. Validate input
-    // 2. Format data for Claude
-    // 3. Call Claude with prompt
+    // 2. Format data for LLM
+    // 3. Call LLM with prompt
     // 4. Parse & structure response
     // 5. Return in ToolResponse wrapper
     return {
@@ -72,15 +72,15 @@ export async function myTool(input: ToolInput): Promise<ToolResponse<OutputType>
 export default myTool;
 ```
 
-## Claude Integration Pattern
+## LLM Integration Pattern
 
 Each tool follows the same pattern:
 
 ```typescript
-const userMessage = `Formatted data for Claude`;
+const userMessage = `Formatted data for LLM`;
 const systemPrompt = getPrompt('TOOL_NAME');
 
-const result = await callClaudeJSON<OutputType>(
+const result = await callLLMJSON<OutputType>(
   userMessage,
   systemPrompt,
   { maxTokens: 2000 }
@@ -88,7 +88,7 @@ const result = await callClaudeJSON<OutputType>(
 ```
 
 Benefits:
-- ✅ One Claude call per tool (no nesting)
+- ✅ One LLM call per tool (no nesting)
 - ✅ Structured JSON responses
 - ✅ Consistent error handling
 - ✅ Easy to test and mock
@@ -100,7 +100,7 @@ Input Validation
     ↓
 Data Formatting (data-formatter.ts)
     ↓
-Claude API Call (claude-client.ts)
+LLM API Call (LLM-client.ts)
     ↓
 JSON Parsing
     ↓
@@ -149,7 +149,7 @@ const result = await analyzeGaps({ gaps: [...] });
 
 ### Data Formatting (data-formatter.ts)
 ```typescript
-// Human-readable formatting for Claude
+// Human-readable formatting for LLM
 formatGapForAnalysis(gap) // Single gap
 formatGapsForAnalysis(gaps) // Multiple gaps
 
@@ -167,13 +167,13 @@ getCriticalGaps(gaps)
 calculateGapStatistics(gaps)
 ```
 
-### Claude Client (claude-client.ts)
+### LLM Client (LLM-client.ts)
 ```typescript
 // Text responses
-await callClaude(message, prompt, options)
+await callLLM(message, prompt, options)
 
 // JSON responses (auto-parsed)
-await callClaudeJSON<T>(message, prompt, options)
+await callLLMJSON<T>(message, prompt, options)
 ```
 
 ## Prompt Management
@@ -230,7 +230,7 @@ Adding a new tool:
 
 1. Create `src/tools/new-tool.ts`
 2. Define input interface
-3. Call Claude with formatted data
+3. Call LLM with formatted data
 4. Return ToolResponse wrapper
 5. Add to `src/tools/index.ts` exports
 6. Create system prompt in `src/prompts/index.ts`
@@ -275,7 +275,7 @@ test('analyzeGaps identifies patterns', async () => {
 
 ## Performance Considerations
 
-- ✅ One Claude call per tool (no nested calls)
+- ✅ One LLM call per tool (no nested calls)
 - ✅ Parallel tool execution possible
 - ✅ Caching not needed (stateless)
 - ✅ Error recovery simple (retry logic)
@@ -316,7 +316,7 @@ Possible without major changes:
 - Add request queue (for rate limiting)
 - Add metrics/observability
 - Add prompt versioning
-- Add multi-model support (Claude + GPT)
+- Add multi-model support (LLM + GPT)
 - Add streaming responses
 - Add concurrent tool execution
 - Add custom validators
@@ -324,7 +324,7 @@ Possible without major changes:
 ## Dependencies
 
 Minimal dependencies:
-- `@anthropic-ai/sdk` - Claude API
+- `@anthropic-ai/sdk` - LLM API
 - `dotenv` - Environment variables
 - `typescript` - Type checking (dev only)
 
@@ -338,5 +338,5 @@ This architecture provides:
 - **Testability** - Each tool testable alone
 - **Extensibility** - Easy to add features
 - **Type Safety** - Compile-time checking
-- **Performance** - Efficient Claude usage
+- **Performance** - Efficient LLM usage
 - **Flexibility** - Works anywhere

@@ -1,4 +1,4 @@
-import { callClaudeJSON } from "../utils/claude-client.js";
+import { callLLMJSON } from "../utils/llm-client".js";
 import { getPrompt } from "../prompts/index.js";
 import { AssignmentGap, ComplianceCheckResult, ToolResponse } from "../types/index.js";
 import { formatGapForAnalysis } from "../utils/data-formatter.js";
@@ -38,7 +38,7 @@ Asset Status: ${gap.assetStatus}
 Analyze against jurisdiction-specific requirements and provide compliance status.
     `.trim();
 
-    const result = await callClaudeJSON<ComplianceCheckResult>(
+    const result = await callLLMJSON<ComplianceCheckResult>(
       userMessage,
       getPrompt("CHECK_COMPLIANCE"),
       { maxTokens: 1500 }

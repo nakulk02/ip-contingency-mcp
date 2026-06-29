@@ -1,4 +1,4 @@
-import { callClaudeJSON } from "../utils/claude-client.js";
+import { callLLMJSON } from "../utils/llm-client".js";
 import { getPrompt } from "../prompts/index.js";
 import { AssignmentGap, Recommendation, ToolResponse } from "../types/index.js";
 import { formatGapForAnalysis } from "../utils/data-formatter.js";
@@ -34,7 +34,7 @@ ${formattedGap}
 Provide specific, actionable recommendations for next steps.
     `.trim();
 
-    const result = await callClaudeJSON<Recommendation>(
+    const result = await callLLMJSON<Recommendation>(
       userMessage,
       getPrompt("RECOMMEND_ACTIONS"),
       { maxTokens: 1500 }

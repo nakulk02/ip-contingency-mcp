@@ -20,7 +20,7 @@ src/
 ├── index.ts           # Main server entry
 ├── tools/             # Intelligence tools (8 tools)
 ├── prompts/           # System prompts for each tool
-├── utils/             # Utilities (Claude client, data formatters)
+├── utils/             # Utilities (LLM client, data formatters)
 └── types/             # TypeScript interfaces
 ```
 

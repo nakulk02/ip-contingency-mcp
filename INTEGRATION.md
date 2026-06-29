@@ -72,7 +72,7 @@ src/
 ├── prompts/
 │   └── index.ts          # System prompts for each tool
 ├── utils/
-│   ├── claude-client.ts   # Claude API wrapper
+│   ├── LLM-client.ts   # LLM API wrapper
 │   └── data-formatter.ts  # Data transformation utilities
 └── types/
     └── index.ts          # TypeScript interfaces
@@ -118,7 +118,7 @@ GET /api/v1/intelligence/:tool
         ↓
 MCP Server (this repo)
         ↓
-Claude API (analyzeGaps, rankPriorities, etc.)
+LLM API (analyzeGaps, rankPriorities, etc.)
         ↓
 Structured JSON response
         ↓
@@ -159,7 +159,7 @@ npm start
 ✅ **Separation of Concerns** - Prompts, tools, utils are isolated
 ✅ **Error Handling** - All tools return ToolResponse wrapper
 ✅ **Extensibility** - Easy to add new tools following same pattern
-✅ **Performance** - One Claude call per tool (no nested calls)
+✅ **Performance** - One LLM call per tool (no nested calls)
 ✅ **Reusability** - Tools work independently of Next.js framework
 
 ## Next Steps

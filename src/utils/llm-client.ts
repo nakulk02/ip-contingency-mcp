@@ -11,9 +11,9 @@ export interface MessageParams {
 }
 
 /**
- * Call Claude API for analysis
+ * Call LLM API for analysis
  */
-export async function callClaude(
+export async function callLLM(
   userMessage: string,
   systemPrompt: string,
   params: MessageParams = {}
@@ -40,18 +40,18 @@ export async function callClaude(
     return content.text;
   }
 
-  throw new Error("Unexpected response format from Claude");
+  throw new Error("Unexpected response format from LLM");
 }
 
 /**
- * Call Claude API and parse JSON response
+ * Call LLM API and parse JSON response
  */
-export async function callClaudeJSON<T>(
+export async function callLLMJSON<T>(
   userMessage: string,
   systemPrompt: string,
   params: MessageParams = {}
 ): Promise<T> {
-  const response = await callClaude(userMessage, systemPrompt, params);
+  const response = await callLLM(userMessage, systemPrompt, params);
 
   try {
     // Extract JSON from response (handle markdown code blocks)

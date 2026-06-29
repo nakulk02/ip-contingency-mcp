@@ -1,4 +1,4 @@
-import { callClaudeJSON } from "../utils/claude-client.js";
+import { callLLMJSON } from "../utils/llm-client".js";
 import { getPrompt } from "../prompts/index.js";
 import { AssignmentGap, QueryResult, ToolResponse } from "../types/index.js";
 import { filterByJurisdiction, filterByRiskLevel } from "../utils/data-formatter.js";
@@ -34,8 +34,8 @@ export async function queryAssignments(input: QueryInput): Promise<ToolResponse<
       };
     }
 
-    // First, ask Claude to interpret the question
-    const interpretation = await callClaudeJSON<QueryInterpretation>(
+    // First, ask LLM to interpret the question
+    const interpretation = await callLLMJSON<QueryInterpretation>(
       `User question about IP assignments: "${question}"`,
       getPrompt("QUERY_ASSIGNMENTS"),
       { maxTokens: 1000 }

@@ -1,4 +1,4 @@
-import { callClaude } from "../utils/claude-client.js";
+import { callLLM } from "../utils/llm-client".js";
 import { getPrompt } from "../prompts/index.js";
 import { AssignmentGap, AdvisoryReport, ActionItem, ToolResponse } from "../types/index.js";
 import {
@@ -62,7 +62,7 @@ Write a professional advisory report with:
 Use clear, concise language suitable for legal review.
     `.trim();
 
-    const advisoryText = await callClaude(userMessage, getPrompt("GENERATE_ADVISORY"), {
+    const advisoryText = await callLLM(userMessage, getPrompt("GENERATE_ADVISORY"), {
       maxTokens: 2500,
     });
 

@@ -1,7 +1,7 @@
 import { AssignmentGap } from "../types/index.js";
 
 /**
- * Format gap data for Claude (human-readable)
+ * Format gap data for LLM (human-readable)
  */
 export function formatGapForAnalysis(gap: AssignmentGap): string {
   return `

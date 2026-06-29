@@ -1,4 +1,4 @@
-import { callClaudeJSON } from "../utils/claude-client.js";
+import { callLLMJSON } from "../utils/llm-client".js";
 import { getPrompt } from "../prompts/index.js";
 import { AssignmentGap, RankedGap, ToolResponse } from "../types/index.js";
 import { formatGapsForAnalysis, sortByRiskScore } from "../utils/data-formatter.js";
@@ -53,7 +53,7 @@ ${formattedGaps}
 Provide priority scores (1-100) and explain reasoning.
     `.trim();
 
-    const rankingResult = await callClaudeJSON<RankingResult>(
+    const rankingResult = await callLLMJSON<RankingResult>(
       userMessage,
       getPrompt("RANK_PRIORITIES"),
       { maxTokens: 2000 }

@@ -1,4 +1,4 @@
-import { callClaudeJSON } from "../utils/claude-client.js";
+import { callLLMJSON } from "../utils/llm-client".js";
 import { getPrompt } from "../prompts/index.js";
 import { AssignmentGap, Prediction, ToolResponse } from "../types/index.js";
 import { formatGapForAnalysis } from "../utils/data-formatter.js";
@@ -46,7 +46,7 @@ Based on the characteristics, predict whether this gap will likely:
 Provide confidence level and reasoning.
     `.trim();
 
-    const result = await callClaudeJSON<Prediction>(
+    const result = await callLLMJSON<Prediction>(
       userMessage,
       getPrompt("PREDICT_RISK"),
       { maxTokens: 1500 }

@@ -1,4 +1,4 @@
-import { callClaudeJSON } from "../utils/claude-client.js";
+import { callLLMJSON } from "../utils/llm-client".js";
 import { getPrompt } from "../prompts/index.js";
 import { AssignmentGap, AnalysisResult, ToolResponse } from "../types/index.js";
 import {
@@ -27,7 +27,7 @@ export async function analyzeGaps(input: AnalysisInput): Promise<ToolResponse<An
       };
     }
 
-    // Prepare data for Claude
+    // Prepare data for LLM
     const formattedGaps = formatGapsForAnalysis(gaps);
     const byJurisdiction = groupGapsByJurisdiction(gaps);
     const byAssetType = groupGapsByAssetType(gaps);
@@ -54,7 +54,7 @@ ${Object.entries(byAssetType)
 Identify patterns and provide analysis.
     `.trim();
 
-    const result = await callClaudeJSON<AnalysisResult>(
+    const result = await callLLMJSON<AnalysisResult>(
       userMessage,
       getPrompt("ANALYZE_GAPS"),
       { maxTokens: 2000 }
